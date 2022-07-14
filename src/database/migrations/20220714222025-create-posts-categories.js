@@ -6,7 +6,6 @@ module.exports = {
       postId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        field: 'post_id',
         reference: {
           model: 'BlogPosts',
           key: 'id'
@@ -15,7 +14,6 @@ module.exports = {
       categoryId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        field: 'category_id',
         reference: {
           model: 'Categories',
           key: 'id'
