@@ -7,6 +7,7 @@ const checkLogin = async (req, res, next) => {
         err.statusCode = 400;
         return next(err);
     }
+    return next();
   } catch (err) {
     console.log(err);
     return next(err);
