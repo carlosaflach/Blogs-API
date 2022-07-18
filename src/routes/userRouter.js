@@ -14,6 +14,7 @@ userRouter.post('/', validateDisplayName,
 
 userRouter.use(auth);
 
-userRouter.get('/', controllers.user.getAllUsers);
+userRouter.get('/', controllers.user.findAllUsers);
+userRouter.get('/:id', controllers.user.findById);
 
 module.exports = userRouter;

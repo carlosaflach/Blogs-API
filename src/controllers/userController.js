@@ -17,10 +17,27 @@ const createUser = async (req, res, next) => {
   }
 };
 
-const getAllUsers = async (req, res, next) => {
+const findAllUsers = async (req, res, next) => {
   try {
-    const users = await services.user.getAllUsers();
+    const users = await services.user.findAll();
     return res.status(200).json(users);
+  } catch (err) {
+    console.log(err);
+    return next(err);
+  }
+};
+
+const findById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await services.user.findById(id);
+    if (!user) {
+      const err = new Error('User does not exist');
+      err.statusCode = 404;
+      return next(err);
+    }
+
+    return res.status(200).json(user);
   } catch (err) {
     console.log(err);
     return next(err);
@@ -29,5 +46,6 @@ const getAllUsers = async (req, res, next) => {
 
 module.exports = {
   createUser,
-  getAllUsers,
+  findAllUsers,
+  findById,
 };
