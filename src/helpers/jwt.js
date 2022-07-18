@@ -8,5 +8,9 @@ const jwtConfig = {
 };
 
 const jwtSign = (payload) => jwt.sign(payload, secret, jwtConfig);
+const jwtVerify = (payload) => jwt.verify(payload, secret);
 
-module.exports = jwtSign;
+module.exports = {
+  jwtSign,
+  jwtVerify,
+};

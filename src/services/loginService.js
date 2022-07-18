@@ -1,13 +1,13 @@
 const { User } = require('../database/models');
 
-const jwt = require('../helpers/jwt');
+const { jwtSign } = require('../helpers/jwt');
 
 const login = async (email, password) => {
   const user = await User.findOne({ where: { email } });
 
   if (!user || user.password !== password) return false;
 
-  const token = jwt({ email });
+  const token = jwtSign({ email });
 
   return { token };
 };

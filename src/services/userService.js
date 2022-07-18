@@ -1,5 +1,5 @@
 const { User } = require('../database/models');
-const jwt = require('../helpers/jwt');
+const { jwtSign } = require('../helpers/jwt');
 
 const createUser = async (displayName, email, password, image) => {
   const userExistis = await User.findOne({ where: { email } });
@@ -8,9 +8,18 @@ const createUser = async (displayName, email, password, image) => {
 
   await User.create({ displayName, email, password, image });
 
-  const token = jwt({ displayName, email });
+  const token = jwtSign({ displayName, email });
 
   return { token };
 };
 
-module.exports = { createUser };
+const getAllUsers = async () => {
+  const users = User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+
+  return users;
+};
+
+module.exports = { createUser,
+getAllUsers };
