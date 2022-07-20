@@ -34,7 +34,26 @@ const getPosts = async (req, res, next) => {
   }
 };
 
+const getPostById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const post = await services.post.getPostById(Number(id));
+
+    if (!post) {
+      const err = new Error('Post does not exist');
+      err.statusCode = 404;
+      return next(err);
+    }
+
+    return res.status(200).json(post);
+  } catch (err) {
+    console.log(err);
+    return next(err);
+  }
+};
+
 module.exports = {
   createBlogPost,
   getPosts,
+  getPostById,
 };

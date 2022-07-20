@@ -15,4 +15,6 @@ controllers.post.createBlogPost);
 
 postRouter.get('/', controllers.post.getPosts);
 
+postRouter.get('/:id', controllers.post.getPostById);
+
 module.exports = postRouter;
