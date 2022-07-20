@@ -13,4 +13,6 @@ postRouter.use(auth);
 postRouter.post('/', validateTitle, validateContent, validateCategoryIds, 
 controllers.post.createBlogPost);
 
+postRouter.get('/', controllers.post.getPosts);
+
 module.exports = postRouter;
