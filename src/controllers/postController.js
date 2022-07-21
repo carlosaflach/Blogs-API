@@ -91,10 +91,24 @@ const deletePost = async (req, res, next) => {
   }
 };
 
+const findBySearchTerm = async (req, res, next) => {
+  try {
+    const { q } = req.query;
+    console.log(q);
+    const posts = await services.post.findBySearchTerm(q);
+    
+    return res.status(200).json(posts);
+  } catch (err) {
+    console.log(err);
+    return next(err);
+  }
+};
+
 module.exports = {
   createBlogPost,
   getPosts,
   getPostById,
   updatePost,
   deletePost,
+  findBySearchTerm,
 };

@@ -15,6 +15,7 @@ controllers.post.createBlogPost);
 
 postRouter.get('/', controllers.post.getPosts);
 
+postRouter.get('/search', controllers.post.findBySearchTerm);
 postRouter.get('/:id', controllers.post.getPostById);
 postRouter.put('/:id', validateTitle, validateContent, controllers.post.updatePost);
 postRouter.delete('/:id', checkIfExists, controllers.post.deletePost);
