@@ -44,8 +44,25 @@ const findById = async (req, res, next) => {
   }
 };
 
+const deleteUser = async (req, res, next) => {
+  try {
+    const decoded = req.token;
+    const isDeleted = await services.user.deleteUser(decoded);
+    if (!isDeleted) {
+      const err = new Error('User does not exists');
+      err.statusCode = 404;
+      return next(err);
+    }
+    return res.status(204).end();
+  } catch (err) {
+    console.log(err);
+    return next(err);
+  }
+};
+
 module.exports = {
   createUser,
   findAllUsers,
   findById,
+  deleteUser,
 };

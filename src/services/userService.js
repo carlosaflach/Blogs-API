@@ -31,8 +31,20 @@ const findById = async (id) => {
   return user;
 };
 
+const deleteUser = async (token) => {
+  const userExistis = await User.findOne({ where: { email: token.email } });
+  if (!userExistis) return false;
+
+  await User.destroy({
+    where: { email: token.email },
+  });
+
+  return true;
+};
+
 module.exports = { 
   createUser,
   findAll,
   findById,
+  deleteUser,
 };
