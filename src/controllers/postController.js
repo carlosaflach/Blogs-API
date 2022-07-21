@@ -65,8 +65,26 @@ const updatePost = async (req, res, next) => {
       err.statusCode = 401;
       return next(err);
     }
-    
+
     return res.status(200).json(updatedPost);
+  } catch (err) {
+    console.log(err);
+    return next(err);
+  }
+};
+
+const deletePost = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const decoded = req.token;
+    const isDeleted = await services.post.deletePost(id, decoded);
+    if (!isDeleted) {
+      const err = new Error('Unauthorized user');
+      err.statusCode = 401;
+      return next(err);
+    }
+
+    return res.status(204).end();
   } catch (err) {
     console.log(err);
     return next(err);
@@ -78,4 +96,5 @@ module.exports = {
   getPosts,
   getPostById,
   updatePost,
+  deletePost,
 };

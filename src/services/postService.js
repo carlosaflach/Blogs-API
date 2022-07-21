@@ -86,9 +86,28 @@ const updatePost = async (id, title, content, decoded) => {
   return updatedPost;
 };
 
+const deletePost = async (id, decoded) => {
+  const post = await BlogPost.findByPk(id, {
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    ],
+  });
+
+  if (post.user.email !== decoded.email) return false;
+
+  const deletedPost = await BlogPost.destroy({
+    where: { id },
+  });
+
+  console.log(deletedPost);
+
+  return true;
+};
+
 module.exports = {
   createPost,
   getPosts,
   getPostById,
   updatePost,
+  deletePost,
 };
