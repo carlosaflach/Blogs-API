@@ -33,7 +33,7 @@ It is a posts and users management system for a blog that presents all the CRUD 
 
   1. Clone the repository
 
-  - `git clone git@github.com:carlosaflach/Store-Manager.git`;
+  - `git clone git@github.com:carlosaflach/Blogs-API.git`;
 
   - Enter in the folder that was created in the cloning process:
     - `cd Blogs-API`;
